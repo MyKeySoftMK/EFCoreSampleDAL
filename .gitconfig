@@ -1,0 +1,2 @@
+[http "https://github.com/"]  OR  [http]
+	sslVerify = false

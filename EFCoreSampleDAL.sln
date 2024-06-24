@@ -5,6 +5,11 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFDesigner2022Tests", "EFDesigner2022Tests\EFDesigner2022Tests.csproj", "{5FE50561-EE9D-4270-AB1F-8BE9CA984EE7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{74073DAC-E05F-4E63-8CE5-941421280086}"
+	ProjectSection(SolutionItems) = preProject
+		.gitconfig = .gitconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
