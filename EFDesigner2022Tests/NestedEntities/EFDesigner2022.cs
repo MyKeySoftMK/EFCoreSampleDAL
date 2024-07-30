@@ -84,14 +84,25 @@ namespace EFDesigner2022Tests
                 try
                 {
                     EntityParentList.Add(EntityParentEntity);
-                    serverEntityParent = _DbContext.EntityParent.Single(EntityParent => EntityParent.Id == EntityParentEntity.Id);
+                    serverEntityParent = _DbContext.EntityParent.
+                        Include(parenteEntity => parenteEntity.Childs).
+                        Single(EntityParent => EntityParent.Id == EntityParentEntity.Id);
 
-                    //_DbContext.Entry(serverEntityParent).CurrentValues.SetValues(EntityParentEntity);
-                    //_DbContext.Update(serverEntityParent);
-                    //_DbContext.UpdateEntity(serverEntityParent,EntityParentEntity);
-                    _DbContext.BulkUpdate<EntityParent>(EntityParentList);
 
+                    // Anpassen der Hauptebene
+                    _DbContext.Entry(serverEntityParent).CurrentValues.SetValues(EntityParentEntity);
+
+
+                    // Temporäres Entfernen der Collections der Navigationseigenschaften
+                    serverEntityParent.Childs.Clear();
                     _DbContext.SaveChanges();
+
+                    // Die Collections erneut hinzufügen und speichern
+                    foreach (var ChildEntity in EntityParentEntity.Childs)
+                    {
+                        serverEntityParent.Childs.Add(ChildEntity);
+                        _DbContext.SaveChanges();
+                    }
 
 
                 }
